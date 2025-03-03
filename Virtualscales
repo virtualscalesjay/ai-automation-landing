@@ -1,0 +1,84 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Automation & Workflow Specialist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .cta {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .cta a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .cta a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📌 AI Automation & Workflow Specialist</h1>
+        <p>Helping Businesses Streamline Operations, Automate Workflows, and Scale Efficiently</p>
+        
+        <div class="section">
+            <h2>👤 About Me</h2>
+            <p>I am an AI Automation & Workflow Specialist with expertise in business process automation, AI-powered lead generation, and sales outreach optimization.</p>
+        </div>
+
+        <div class="section">
+            <h2>🚀 What I Do</h2>
+            <ul>
+                <li><strong>AI-Powered Sales & Lead Generation Automation</strong> - Cold email & LinkedIn outreach, AI chatbots, workflow automation.</li>
+                <li><strong>Business Process & Workflow Optimization</strong> - CRM integration, AI scheduling, task automation.</li>
+                <li><strong>Reputation Management & Client Retention</strong> - Review automation, AI feedback response.</li>
+                <li><strong>AI-Powered Customer Support & Communication</strong> - AI voice, SMS automation, chatbot development.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📊 Tools & Technologies</h2>
+            <p>CRM: GoHighLevel, HubSpot | AI: OpenAI, Twilio | Automation: Zapier, n8n | Project Management: ClickUp, Asana</p>
+        </div>
+
+        <div class="section">
+            <h2>📈 Case Studies & Success Stories</h2>
+            <p><strong>AI-Powered Outreach</strong> - Increased response rates by 40%, reduced manual effort by 80%.</p>
+            <p><strong>AI Chatbots</strong> - Reduced response time from 24 hours to under 5 minutes.</p>
+            <p><strong>Reputation Management</strong> - Increased positive reviews by 70% in 3 months.</p>
+        </div>
+
+        <div class="cta">
+            <h2>📞 Let’s Work Together</h2>
+            <p>Looking to streamline operations or enhance customer engagement? Let’s connect!</p>
+            <a href="#">Book a Call</a>
+        </div>
+    </div>
+</body>
+</html>
