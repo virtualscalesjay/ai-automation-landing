@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VirtualScales - AI-Powered Business Growth</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(102, 126, 234, 0.9);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+            min-height: 100vh;
+            padding-top: 100px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Home Section */
+        .hero {
+            padding: 4rem 0 6rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.8s ease-out 0.3s both;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Features Section */
+        .features-content {
+            padding: 2rem 0 4rem;
+            color: white;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .features-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* About Section */
+        .about-content {
+            padding: 2rem 0 4rem;
+            color: white;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .story-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 20px;
+            border-left: 5px solid #fff;
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .timeline-item:nth-child(even) {
+            animation: slideInRight 0.8s ease-out;
+            border-left: none;
+            border-right: 5px solid #fff;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .timeline-item:nth-child(even):hover {
+            transform: translateX(-10px);
+        }
+
+        .timeline-year {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #e0e7ff;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .mission-card, .vision-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .mission-card:hover, .vision-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            padding: 2rem 0 4rem;
+            color: white;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .contact-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            width: 50px;
+        }
+
+        .contact-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-details p {
+            opacity: 0.9;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 1rem;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Loading state */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading .submit-btn {
+            background: #ccc;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .form-section {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 2rem 0 3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item:nth-child(even) {
+                border-left: 5px solid #fff;
+                border-right: none;
+            }
+
+            .timeline-item:hover,
+            .timeline-item:nth-child(even):hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(102, 126, 234, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo" onclick="showSection('home')">VirtualScales</a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showSection('home')" class="nav-link">Home</a></li>
+                <li><a href="#" onclick="showSection('features')" class="nav-link">Features</a></li>
+                <li><a href="#" onclick="showSection('about')" class="nav-link">About</a></li>
+                <li><a href="#" onclick="showSection('contact')" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Transform Your Business with AI</h1>
+                        <p>From solo struggles to scaling success. Let VirtualScales bridge the gap between where you are and where you want to be with cutting-edge AI solutions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="container">
+                <div class="form-section">
+                    <div class="success-message" id="successMessage">
+                        🎉 Thank you! Your information has been submitted successfully. We'll be in touch soon!
+                    </div>
+                    
+                    <h2>Start Your Scaling Journey</h2>
+                    <form id="leadForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company Name</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="industry">Industry</label>
+                            <select id="industry" name="industry">
+                                <option value="">Select Industry</option>
+                                <option value="technology">Technology</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="finance">Finance</option>
+                                <option value="retail">Retail</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="education">Education</option>
+                                <option value="consulting">Consulting</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">What scaling challenges are you facing?</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your business goals and challenges..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <span id="btnText">Get My Free AI Strategy Session</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="page-section">
+            <div class="container">
+                <div class="features-content">
+                    <div class="features-header">
+                        <h1>AI-Powered Solutions</h1>
+                        <p style="font-size: 1.2rem; opacity: 0.9;">Discover how VirtualScales transforms businesses through intelligent automation and strategic AI implementation.</p>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🤖</div>
+                            <h3>AI Process Automation</h3>
+                            <p>Automate repetitive tasks and workflows with intelligent AI systems that learn and adapt to your business needs, freeing up your team for strategic work.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📊</div>
+                            <h3>Data-Driven Insights</h3>
+                            <p>Transform raw data into actionable intelligence with AI-powered analytics that reveal hidden patterns and opportunities for growth.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🚀</div>
+                            <h3>Scalable Infrastructure</h3>
+                            <p>Build systems that grow with your business. Our AI solutions scale seamlessly from startup to enterprise without breaking your budget.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">💡</div>
+                            <h3>Custom AI Solutions</h3>
+                            <p>Every business is unique. We craft tailored AI solutions that address your specific challenges and unlock your company's potential.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Rapid Implementation</h3>
+                            <p>Get results fast with our proven implementation methodology. See measurable improvements in weeks, not months.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3>Strategic Consulting</h3>
+                            <p>Benefit from years of experience in AI and business scaling. We guide you through every step of your transformation journey.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="page-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-header">
+                        <h1>The VirtualScales Story</h1>
+                        <p style="font-size: 1.2rem; opacity: 0.9;">From freelancer's struggle to AI-powered scaling solutions - a journey of turning pain into purpose.</p>
+                    </div>
+                    
+                    <div class="story-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">2019 - The Beginning</div>
+                            <div class="timeline-title">The Freelancer's Dilemma</div>
+                            <div class="timeline-description">
+                                It started with late nights and endless client calls. As a solo freelancer juggling multiple projects, I was drowning in repetitive tasks - data entry, email management, scheduling, reporting. The irony was crushing: helping other businesses grow while my own potential remained trapped in manual processes. There had to be a better way.
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-year">2020 - The Awakening</div>
+                            <div class="timeline-title">Finding the Gap</div>
+                            <div class="timeline-description">
+                                During the pandemic, I witnessed countless small businesses struggling with the same problems I faced. They were burning out, working IN their business instead of ON it. The tools existed to automate and scale, but there was a massive gap - no one was bridging the divide between complex AI technology and practical business needs for growing companies.
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-year">2021 - The Experiment</div>
+                            <div class="timeline-title">First AI Implementation</div>
+                            <div class="timeline-description">
+                                I built my first AI automation system out of necessity - a client management bot that handled 80% of my routine communications. The results were staggering: I reclaimed 20 hours per week and could finally focus on strategy and growth. That's when it hit me - this wasn't just about efficiency, it was about liberation.
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-year">2022 - The Validation</div>
+                            <div class="timeline-title">Helping Others Scale</div>
+                            <div class="timeline-description">
+                                I started quietly implementing AI solutions for other entrepreneurs. A consultant doubled their client capacity. An e-commerce store owner automated their inventory management. A marketing agency reduced project delivery time by 60%. Each success story confirmed what I suspected - the future belonged to businesses that could harness AI for scaling, not just technology for technology's sake.
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-year">2023 - The Revolution</div>
+                            <div class="timeline-title">VirtualScales is Born</div>
+                            <div class="timeline-description">
+                                With proven methodologies and a growing track record, VirtualScales officially launched. Our mission became clear: democratize AI-powered scaling for businesses ready to break free from operational limitations. We don't just implement technology - we architect growth systems that transform how companies operate and compete.
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-year">2024 - The Impact</div>
+                            <div class="timeline-title">Scaling the Scalers</div>
+                            <div class="timeline-description">
+                                Today, VirtualScales has helped dozens of businesses multiply their capacity without multiplying their stress. From solopreneurs to scaling startups, we've proven that the right AI strategy doesn't just improve efficiency - it unlocks exponential growth potential that most businesses never knew they had.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mission-vision">
+                        <div class="mission-card">
+                            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🎯 Our Mission</h3>
+                            <p style="font-size: 1.1rem; line-height: 1.7;">
+                                To bridge the gap between AI potential and business reality, transforming how companies scale by making intelligent automation accessible, practical, and profitable for businesses of all sizes.
+                            </p>
+                        </div>
+                        <div class="vision-card">
+                            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🚀 Our Vision</h3>
+                            <p style="font-size: 1.1rem; line-height: 1.7;">
+                                A world where every business owner can focus on what they do best while AI handles the rest - where scaling doesn't mean sacrificing sanity, and growth doesn't require growing pains.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="page-section">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-header">
+                        <h1>Let's Scale Together</h1>
+                        <p style="font-size: 1.2rem; opacity: 0.9;">Ready to transform your business with AI? Let's start the conversation about your scaling journey.</p>
+                    </div>
+                    
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <h3 style="margin-bottom: 2rem; font-size: 1.5rem;">Get In Touch</h3>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">📧</div>
+                                <div class="contact-details">
+                                    <h3>Email</h3>
+                                    <p>hello@virtualscales.ai</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">💬</div>
+                                <div class="contact-details">
+                                    <h3>Response Time</h3>
+                                    <p>Within 24 hours</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">🌐</div>
+                                <div class="contact-details">
+                                    <h3>Time Zone</h3>
+                                    <p>Global Coverage</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">🎯</div>
+                                <div class="contact-details">
+                                    <h3>Specialization</h3>
+                                    <p>AI-Powered Business Scaling</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section" style="margin: 0; animation: none;">
+                            <h2 style="font-size: 1.5rem;">Send a Message</h2>
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <label for="contactName">Full Name *</label>
+                                    <input type="text" id="contactName" name="contactName" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contactEmail">Email Address *</label>
+                                    <input type="email" id="contactEmail" name="contactEmail" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contactSubject">Subject *</label>
+                                    <input type="text" id="contactSubject" name="contactSubject" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contactMessage">Message *</label>
+                                    <textarea id="contactMessage" name="contactMessage" required placeholder="Tell us about your project or ask any questions..."></textarea>
+                                </div>
+
+                                <button type="submit" class="submit-btn">
+                                    <span id="contactBtnText">Send Message</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(255, 255, 255, 0.1); border-radius: 20px; backdrop-filter: blur(10px);">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">🤝 Partnership Opportunities</h3>
+                        <p style="font-size: 1.1rem; opacity: 0.9; line-height: 1.6;">
+                            Looking to integrate AI solutions into your existing services? We offer white-label partnerships and consulting arrangements for agencies, consultants, and technology providers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Navigation functionality
+        let currentSection = 'home';
+
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(sectionName);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                currentSection = sectionName;
+            }
+
+            // Update active nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Find and activate corresponding nav link
+            const activeLink = document.querySelector(`.nav-link[onclick*="${sectionName}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+
+            // Close mobile menu if open
+            const navLinks2 = document.getElementById('navLinks');
+            navLinks2.classList.remove('show');
+
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('show');
+        }
+
+        // Form handling for main lead form
+        const form = document.getElementById('leadForm');
+        const successMessage = document.getElementById('successMessage');
+        const btnText = document.getElementById('btnText');
+
+        if (form) {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                form.classList.add('loading');
+                btnText.textContent = 'Submitting...';
+                
+                // Collect form data
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+                
+                // Add metadata
+                data.timestamp = new Date().toISOString();
+                data.source = 'VirtualScales Landing Page - Main Form';
+                data.formType = 'Lead Generation';
+                
+                try {
+                    // Simulate API call - Replace with your actual CRM endpoint
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
+                    // HERE'S WHERE YOU'LL CONNECT TO YOUR CRM
+                    // const response = await fetch('/api/submit-lead', {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //         'Authorization': 'Bearer YOUR_API_KEY'
+                    //     },
+                    //     body: JSON.stringify(data)
+                    // });
+                    
+                    // For demo purposes, always succeed
+                    console.log('Lead form data:', data);
+                    
+                    // Show success message
+                    successMessage.classList.add('show');
+                    form.reset();
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                    }, 5000);
+                    
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    alert('There was an error submitting your form. Please try again or email us directly at hello@virtualscales.ai');
+                } finally {
+                    // Reset loading state
+                    form.classList.remove('loading');
+                    btnText.textContent = 'Get My Free AI Strategy Session';
+                }
+            });
+        }
+
+        // Contact form handling
+        const contactForm = document.getElementById('contactForm');
+        const contactBtnText = document.getElementById('contactBtnText');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                contactForm.classList.add('loading');
+                contactBtnText.textContent = 'Sending...';
+                
+                // Collect form data
+                const formData = new FormData(contactForm);
+                const data = Object.fromEntries(formData.entries());
+                
+                // Add metadata
+                data.timestamp = new Date().toISOString();
+                data.source = 'VirtualScales Landing Page - Contact Form';
+                data.formType = 'Contact Inquiry';
+                
+                try {
+                    // Simulate API call - Replace with your actual CRM endpoint
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
+                    console.log('Contact form data:', data);
+                    
+                    // Show success and reset
+                    alert('✅ Message sent successfully! We\'ll get back to you within 24 hours.');
+                    contactForm.reset();
+                    
+                } catch (error) {
+                    console.error('Contact form submission error:', error);
+                    alert('There was an error sending your message. Please try again or email us directly at hello@virtualscales.ai');
+                } finally {
+                    // Reset loading state
+                    contactForm.classList.remove('loading');
+                    contactBtnText.textContent = 'Send Message';
+                }
+            });
+        }
+
+        // Enhanced input interactions
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+                this.parentElement.style.transition = 'transform 0.2s ease';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+
+            // Enhanced validation feedback
+            if (input.hasAttribute('required')) {
+                input.addEventListener('blur', function() {
+                    if (this.value.trim() === '') {
+                        this.style.borderColor = '#ef4444';
+                        this.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
+                    } else {
+                        this.style.borderColor = '#10b981';
+                        this.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.1)';
+                    }
+                });
+
+                input.addEventListener('input', function() {
+                    if (this.value.trim() !== '') {
+                        this.style.borderColor = '#10b981';
+                        this.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.1)';
+                    }
+                });
+            }
+        });
+
+        // Header scroll effect
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        // Animate elements on scroll (for better UX)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe timeline items and feature cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.timeline-item, .feature-card');
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial active nav link
+            const homeLink = document.querySelector('.nav-link[onclick*="home"]');
+            if (homeLink) {
+                homeLink.classList.add('active');
+            }
+        });
+
+        // Prevent form resubmission on page refresh
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+</body>
+</html>
